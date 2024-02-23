@@ -3,8 +3,6 @@ package com.kaen.whatsappclone;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,7 +56,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements ChatAdapte
                 ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) binding.userNameChatDetails.getLayoutParams();
 
                 if (isOnline){
-                    layoutParams.setMargins(5,0,5,30);
+                    layoutParams.setMargins(5,0,5,25);
                     binding.userNameChatDetails.setLayoutParams(layoutParams);
                     binding.isOnlineChatDetailsText.setVisibility(View.VISIBLE);
                 }

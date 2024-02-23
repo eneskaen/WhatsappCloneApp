@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="lightGrey">#5A5A5A</color>
+    <color name="chatGrey">#474747</color>
+    <color name="lightGreyTransparent">#7F969696</color>
+
+    <!-- Toolbar ve ActionBar rengi -->
+    <color name="colorPrimary">#075e54</color>
+    <color name="colorPrimaryDark">#054a3c</color>
+
+    <!-- StatusBar rengi -->
+    <color name="colorStatusBar">#075e54</color>
+
+    <!-- Arka plan rengi -->
+    <color name="colorBackground">#ffffff</color>
+
+    <!-- Gönderme düğmesi rengi -->
+    <color name="colorSendButton">#25d366</color>
+
+    <!-- Metin rengi -->
+    <color name="colorText">#000000</color>
+
+    <!-- Gönderilen mesajın balon rengi -->
+    <color name="colorOutgoingMessage">#dcf8c6</color>
+
+    <!-- Alınan mesajın balon rengi -->
+    <color name="colorIncomingMessage">#ffffff</color>
+
+    <!-- Mesaj balonunun kenarlık rengi -->
+    <color name="colorMessageBorder">#cfd8dc</color>
+
+    <!-- Gönderilen mesajın metin rengi -->
+    <color name="colorOutgoingMessageText">#000000</color>
+
+    <!-- Alınan mesajın metin rengi -->
+    <color name="colorIncomingMessageText">#000000</color>
+
+    <!-- Kullanıcı adı rengi -->
+    <color name="colorUsername">#075e54</color>
+
+    <!-- Menü arka plan rengi -->
+    <color name="colorMenuBackground">#ffffff</color>
+
+    <!-- Menü metin rengi -->
+    <color name="colorMenuText">#000000</color>
+
+    <!-- Seçili menü öğesi rengi -->
+    <color name="colorMenuSelected">#e3f2fd</color>
+    <color name="transparent">#00FFFFFF</color>
+</resources>

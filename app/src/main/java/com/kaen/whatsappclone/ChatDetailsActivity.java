@@ -1,13 +1,16 @@
 package com.kaen.whatsappclone;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -17,7 +20,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.kaen.whatsappclone.adapter.ChatAdapter;
 import com.kaen.whatsappclone.databinding.ActivityChatDetailsBinding;
 import com.kaen.whatsappclone.model.Message;
-import com.kaen.whatsappclone.model.User;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -42,12 +44,40 @@ public class ChatDetailsActivity extends AppCompatActivity implements ChatAdapte
 
 
         final  String senderId = mAuth.getUid();
-        String recievedId = getIntent().getStringExtra("userId");
+        String receiverId = getIntent().getStringExtra("userId");
         String userName = getIntent().getStringExtra("userName");
         String profileImage = getIntent().getStringExtra("userProfileImage");
 
         binding.userNameChatDetails.setText(userName);
         Picasso.get().load(profileImage).placeholder(R.drawable.avatar_default).into(binding.profileImageChatDetails);
+
+        ValueEventListener isOnlineListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean isOnline = snapshot.getValue(Boolean.class);
+                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) binding.userNameChatDetails.getLayoutParams();
+
+                if (isOnline){
+                    layoutParams.setMargins(5,0,5,30);
+                    binding.userNameChatDetails.setLayoutParams(layoutParams);
+                    binding.isOnlineChatDetailsText.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    layoutParams.setMargins(5,0,5,0);
+                    binding.userNameChatDetails.setLayoutParams(layoutParams);
+                    binding.isOnlineChatDetailsText.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+        database.getReference().child("Users").child(receiverId).child("isOnline").addValueEventListener(isOnlineListener);
 
         binding.backButton.setOnClickListener(v -> {
 
@@ -57,7 +87,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements ChatAdapte
         });
 
         final ArrayList<Message> messageArrayList = new ArrayList<>();
-        final ChatAdapter chatAdapter = new ChatAdapter(this, messageArrayList, recievedId);
+        final ChatAdapter chatAdapter = new ChatAdapter(this, messageArrayList, receiverId);
 
         chatAdapter.setDateChangeListener(this);
 
@@ -65,8 +95,8 @@ public class ChatDetailsActivity extends AppCompatActivity implements ChatAdapte
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.chatDetailsRecyclerView.setLayoutManager(layoutManager);
 
-        final String senderRoom = senderId + recievedId;
-        final String recieverRoom = recievedId + senderId;
+        final String senderRoom = senderId + receiverId;
+        final String recieverRoom = receiverId + senderId;
 
         database.getReference().child("Chats")
                         .child(senderRoom).addValueEventListener(new ValueEventListener() {
@@ -144,6 +174,8 @@ public class ChatDetailsActivity extends AppCompatActivity implements ChatAdapte
 
 
     }
+
+
 
 
 }

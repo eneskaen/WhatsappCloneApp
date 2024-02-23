@@ -1,21 +1,19 @@
 package com.kaen.whatsappclone.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.kaen.whatsappclone.R;
 import com.kaen.whatsappclone.adapter.UsersAdapter;
 import com.kaen.whatsappclone.databinding.FragmentChatsBinding;
 import com.kaen.whatsappclone.model.User;

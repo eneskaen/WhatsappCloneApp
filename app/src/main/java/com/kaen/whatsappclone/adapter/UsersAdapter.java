@@ -62,7 +62,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         return userArrayList.size();
     }
 
-    public class UserViewHolder extends RecyclerView.ViewHolder{
+    public static class UserViewHolder extends RecyclerView.ViewHolder{
 
         UserListItemBinding binding;
         public UserViewHolder(UserListItemBinding binding) {

@@ -1,15 +1,15 @@
 package com.kaen.whatsappclone;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -17,7 +17,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -27,7 +26,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kaen.whatsappclone.databinding.ActivitySignInBinding;
-import com.kaen.whatsappclone.databinding.ActivitySignUpBinding;
 import com.kaen.whatsappclone.model.User;
 
 public class SignInActivity extends AppCompatActivity {
@@ -139,6 +137,10 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
+    private void writeToDatabase(String userUid, User user) {
+        mRef.child(userUid).setValue(user);
+    }
+
     private void googleFirebaseAuth(String idToken) {
 
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
@@ -149,8 +151,11 @@ public class SignInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()){
-
                             progressBar.setVisibility(View.GONE);
+
+                            FirebaseUser googleUser = mAuth.getCurrentUser();
+                            User user = new User(googleUser.getDisplayName(), googleUser.getEmail(), null ,googleUser.getPhotoUrl().toString());
+                            writeToDatabase(googleUser.getUid(), user);
                             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();

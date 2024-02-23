@@ -19,7 +19,7 @@ public class User {
     public User(String username, String email, String password, String profileImageUrl) {
         this.username = username;
         this.email = email;
-
+        this.isOnline = false;
         if (password != null) {
             this.password = password;
         }
@@ -33,16 +33,18 @@ public class User {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+        this.isOnline = false;
     }
 
     //Constructor all params.
-    public User(String id, String username, String email, String password, String profileImageUrl, String lastMessage) {
+    public User(String id, String username, String email, String password, String profileImageUrl, String lastMessage, boolean isOnline) {
         Id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.profileImageUrl = profileImageUrl;
         this.lastMessage = lastMessage;
+        this.isOnline = isOnline;
     }
 
     @SerializedName("userId")
@@ -68,6 +70,11 @@ public class User {
     @SerializedName("userLastMessage")
     @Expose
     private String lastMessage;
+
+
+    @SerializedName("userIsOnline")
+    @Expose
+    private boolean isOnline;
 
     public String getId() {
         return Id;
@@ -115,6 +122,14 @@ public class User {
 
     public void setLastMessage(String lastMessage) {
         this.lastMessage = lastMessage;
+    }
+
+    public boolean isOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(boolean online) {
+        isOnline = online;
     }
 
     @BindingAdapter("android:loadImage")

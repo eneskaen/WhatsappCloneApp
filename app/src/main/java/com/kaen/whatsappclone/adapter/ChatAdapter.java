@@ -4,28 +4,19 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CalendarView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-import com.kaen.whatsappclone.R;
-import com.kaen.whatsappclone.databinding.ActivityChatDetailsBinding;
 import com.kaen.whatsappclone.databinding.SampleRecieverBinding;
 import com.kaen.whatsappclone.databinding.SampleSenderBinding;
 import com.kaen.whatsappclone.model.Message;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class ChatAdapter extends RecyclerView.Adapter{
     Context context;

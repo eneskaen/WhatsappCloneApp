@@ -17,10 +17,10 @@ public class User {
 
 
     //Constructor for sign up or sign in GOOGLE.
-    public User(String username, String email, String password, String profileImageUrl) {
+    public User(String username, String email, String password, String profileImageUrl, boolean isOnline) {
         this.username = username;
         this.email = email;
-        this.isOnline = false;
+        this.isOnline = isOnline;
         if (password != null) {
             this.password = password;
         }

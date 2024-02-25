@@ -154,7 +154,7 @@ public class SignInActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()){
                             FirebaseUser googleUser = mAuth.getCurrentUser();
-                            User user = new User(googleUser.getDisplayName(), googleUser.getEmail(), null ,googleUser.getPhotoUrl().toString());
+                            User user = new User(googleUser.getDisplayName(), googleUser.getEmail(), null ,googleUser.getPhotoUrl().toString(), true);
                             writeToDatabase(googleUser.getUid(), user);
                             UserStatusManager.getInstance().setOnline(true);
                             progressBar.setVisibility(View.GONE);

@@ -1,6 +1,7 @@
 package com.kaen.whatsappclone.singletons;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class UserStatusManager {
@@ -21,7 +22,7 @@ public class UserStatusManager {
     public void setOnline(boolean online){
         isOnline = online;
 
-        if (FirebaseAuth.getInstance()!=null){
+        if (FirebaseAuth.getInstance().getCurrentUser() !=null){
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             String userId = mAuth.getCurrentUser().getUid();
             FirebaseDatabase database = FirebaseDatabase.getInstance();

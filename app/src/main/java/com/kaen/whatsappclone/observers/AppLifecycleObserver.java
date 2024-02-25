@@ -9,6 +9,7 @@ import com.kaen.whatsappclone.singletons.UserStatusManager;
 
 public class AppLifecycleObserver implements LifecycleObserver {
 
+
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onEnterForeground() {
         MyApp.getInstance().setAppInForeground(true);

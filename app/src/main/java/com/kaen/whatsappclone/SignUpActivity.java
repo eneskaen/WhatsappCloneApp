@@ -116,7 +116,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
-                    User user = new User(username, email, password,null);
+                    User user = new User(username, email, password,null, true);
                     String userUid = authResult.getUser().getUid();
                     writeToDatabase(userUid, user);
 
@@ -164,7 +164,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()){
                             FirebaseUser googleUser = mAuth.getCurrentUser();
-                            User user = new User(googleUser.getDisplayName(), googleUser.getEmail(), null ,googleUser.getPhotoUrl().toString());
+                            User user = new User(googleUser.getDisplayName(), googleUser.getEmail(), null ,googleUser.getPhotoUrl().toString(), true);
                             writeToDatabase(googleUser.getUid(), user);
                             UserStatusManager.getInstance().setOnline(true);
                             progressBar.setVisibility(View.GONE);

@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Group Chat", Toast.LENGTH_SHORT).show();
         }else if (id == R.id.toolbarLogout) {
             progressBar.setVisibility(View.VISIBLE);
+            UserStatusManager.getInstance().setOnline(false);
             mAuth.signOut();
             googleSignOut();
-            UserStatusManager.getInstance().setOnline(false);
             progressBar.setVisibility(View.GONE);
             Intent intent = new Intent(this, SignInActivity.class);
             startActivity(intent);

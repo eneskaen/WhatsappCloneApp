@@ -1,19 +1,17 @@
-package com.kaen.whatsappclone.adapter;
+package com.kaen.whatsappclone.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kaen.whatsappclone.databinding.SampleRecieverBinding;
 import com.kaen.whatsappclone.databinding.SampleSenderBinding;
-import com.kaen.whatsappclone.model.Message;
+import com.kaen.whatsappclone.models.Message;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -139,5 +137,6 @@ public class ChatAdapter extends RecyclerView.Adapter{
             this.binding = binding;
         }
     }
+
 
 }

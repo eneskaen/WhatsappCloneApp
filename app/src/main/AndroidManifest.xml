@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatsappClone"
         android:hardwareAccelerated="true"
+        android:name=".singletons.MyApp"
         tools:targetApi="31">
         <activity
             android:name=".ChatDetailsActivity"

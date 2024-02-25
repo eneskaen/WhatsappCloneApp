@@ -1,4 +1,4 @@
-package com.kaen.whatsappclone.adapter;
+package com.kaen.whatsappclone.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kaen.whatsappclone.ChatDetailsActivity;
 import com.kaen.whatsappclone.databinding.UserListItemBinding;
-import com.kaen.whatsappclone.model.User;
+import com.kaen.whatsappclone.models.User;
 
 import java.util.ArrayList;
 
@@ -35,6 +35,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = userArrayList.get(position);
+
         holder.binding.setUser(user);
         holder.binding.executePendingBindings();
 
@@ -50,7 +51,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
                 context.startActivity(intent);
 
             }
-
 
         });
 

@@ -1,4 +1,4 @@
-package com.kaen.whatsappclone.model;
+package com.kaen.whatsappclone.models;
 
 import android.widget.TextView;
 

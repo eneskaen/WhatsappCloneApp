@@ -14,9 +14,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.kaen.whatsappclone.adapter.UsersAdapter;
+import com.kaen.whatsappclone.adapters.UsersAdapter;
 import com.kaen.whatsappclone.databinding.FragmentChatsBinding;
-import com.kaen.whatsappclone.model.User;
+import com.kaen.whatsappclone.models.User;
 
 import java.util.ArrayList;
 

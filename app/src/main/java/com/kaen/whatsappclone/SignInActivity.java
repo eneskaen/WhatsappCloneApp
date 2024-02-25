@@ -26,7 +26,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kaen.whatsappclone.databinding.ActivitySignInBinding;
-import com.kaen.whatsappclone.model.User;
+import com.kaen.whatsappclone.models.User;
+import com.kaen.whatsappclone.singletons.UserStatusManager;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -59,6 +60,7 @@ public class SignInActivity extends AppCompatActivity {
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnSuccessListener(authResult -> {
                             progressBar.setVisibility(View.GONE);
+                            UserStatusManager.getInstance().setOnline(true);
                             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -89,7 +91,7 @@ public class SignInActivity extends AppCompatActivity {
         });
 
         if (mAuth.getCurrentUser() != null){
-
+            UserStatusManager.getInstance().setOnline(true);
             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -151,11 +153,11 @@ public class SignInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()){
-                            progressBar.setVisibility(View.GONE);
-
                             FirebaseUser googleUser = mAuth.getCurrentUser();
                             User user = new User(googleUser.getDisplayName(), googleUser.getEmail(), null ,googleUser.getPhotoUrl().toString());
                             writeToDatabase(googleUser.getUid(), user);
+                            UserStatusManager.getInstance().setOnline(true);
+                            progressBar.setVisibility(View.GONE);
                             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -163,6 +165,6 @@ public class SignInActivity extends AppCompatActivity {
 
                     }
                 });
-
     }
+
 }

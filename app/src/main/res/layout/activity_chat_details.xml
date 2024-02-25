@@ -6,7 +6,7 @@
     <data>
         <variable
             name="user"
-            type="com.kaen.whatsappclone.model.User" />
+            type="com.kaen.whatsappclone.models.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -137,9 +137,7 @@
                     android:textColor="@color/white"
                     app:layout_constraintTop_toBottomOf="@id/userNameChatDetails"
                     app:layout_constraintStart_toStartOf="@id/userNameChatDetails"
-                    app:layout_constraintEnd_toEndOf="@id/userNameChatDetails"
-                    android:textAlignment="textStart"
-                    android:layout_marginStart="5dp"/>
+                    android:gravity="start"/>
 
 
                 <ImageView

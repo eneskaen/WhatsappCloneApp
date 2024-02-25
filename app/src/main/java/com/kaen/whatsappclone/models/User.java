@@ -1,4 +1,4 @@
-package com.kaen.whatsappclone.model;
+package com.kaen.whatsappclone.models;
 
 import android.widget.ImageView;
 
@@ -15,7 +15,8 @@ public class User {
     }
 
 
-    //Constructor for sign up.
+
+    //Constructor for sign up or sign in GOOGLE.
     public User(String username, String email, String password, String profileImageUrl) {
         this.username = username;
         this.email = email;
@@ -28,6 +29,8 @@ public class User {
             this.profileImageUrl = profileImageUrl;
         }
     }
+
+
 
     //Constructor for sign in.
     public User(String email, String password) {

@@ -17,19 +17,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-import com.kaen.whatsappclone.adapter.FragmentsAdapter;
+import com.kaen.whatsappclone.adapters.FragmentsAdapter;
 import com.kaen.whatsappclone.databinding.ActivityMainBinding;
+import com.kaen.whatsappclone.singletons.UserStatusManager;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private Toolbar toolbar;
     private FirebaseAuth mAuth;
-    private FirebaseDatabase database;
     private GoogleSignInClient mGoogleSignInClient;
     private ProgressBar progressBar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
             mAuth.signOut();
             googleSignOut();
+            UserStatusManager.getInstance().setOnline(false);
             progressBar.setVisibility(View.GONE);
             Intent intent = new Intent(this, SignInActivity.class);
             startActivity(intent);
@@ -87,38 +86,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        updateUserIsOnline(true);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateUserIsOnline(true);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        updateUserIsOnline(false);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        updateUserIsOnline(false);
-    }
-
-    private void updateUserIsOnline(boolean isOnline){
-        mAuth = FirebaseAuth.getInstance();
-        String userId = mAuth.getCurrentUser().getUid();
-        database = FirebaseDatabase.getInstance();
-        database.getReference().child("Users").child(userId).child("isOnline").setValue(isOnline);
-
     }
 
 }

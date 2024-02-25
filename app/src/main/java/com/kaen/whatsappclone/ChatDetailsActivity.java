@@ -15,9 +15,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.kaen.whatsappclone.adapter.ChatAdapter;
+import com.kaen.whatsappclone.adapters.ChatAdapter;
 import com.kaen.whatsappclone.databinding.ActivityChatDetailsBinding;
-import com.kaen.whatsappclone.model.Message;
+import com.kaen.whatsappclone.models.Message;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -40,7 +40,6 @@ public class ChatDetailsActivity extends AppCompatActivity implements ChatAdapte
 
         mAuth = FirebaseAuth.getInstance();
 
-
         final  String senderId = mAuth.getUid();
         String receiverId = getIntent().getStringExtra("userId");
         String userName = getIntent().getStringExtra("userName");
@@ -56,7 +55,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements ChatAdapte
                 ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) binding.userNameChatDetails.getLayoutParams();
 
                 if (isOnline){
-                    layoutParams.setMargins(5,0,5,25);
+                    layoutParams.setMargins(5,0,5,40);
                     binding.userNameChatDetails.setLayoutParams(layoutParams);
                     binding.isOnlineChatDetailsText.setVisibility(View.VISIBLE);
                 }
@@ -154,7 +153,6 @@ public class ChatDetailsActivity extends AppCompatActivity implements ChatAdapte
         String yesterdayDate = dateFormat.format(yesterdayCal.getTime());
 
 
-
         if (currentDate.equals(newDate))
         {
             binding.dateOfMessages.setVisibility(View.GONE);
@@ -170,9 +168,7 @@ public class ChatDetailsActivity extends AppCompatActivity implements ChatAdapte
             binding.dateOfMessages.setText(newDate);
         }
 
-
     }
-
 
 
 

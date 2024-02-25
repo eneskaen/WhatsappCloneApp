@@ -1,4 +1,4 @@
-package com.kaen.whatsappclone.adapter;
+package com.kaen.whatsappclone.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

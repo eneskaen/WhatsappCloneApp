@@ -26,7 +26,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kaen.whatsappclone.databinding.ActivitySignUpBinding;
-import com.kaen.whatsappclone.model.User;
+import com.kaen.whatsappclone.models.User;
+import com.kaen.whatsappclone.singletons.UserStatusManager;
 
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseDatabase database;
@@ -162,11 +163,10 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()){
-
                             FirebaseUser googleUser = mAuth.getCurrentUser();
-
                             User user = new User(googleUser.getDisplayName(), googleUser.getEmail(), null ,googleUser.getPhotoUrl().toString());
                             writeToDatabase(googleUser.getUid(), user);
+                            UserStatusManager.getInstance().setOnline(true);
                             progressBar.setVisibility(View.GONE);
                             Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                             startActivity(intent);

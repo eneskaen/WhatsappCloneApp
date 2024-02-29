@@ -28,6 +28,7 @@ public class User {
         if (profileImageUrl != null) {
             this.profileImageUrl = profileImageUrl;
         }
+
     }
 
 
@@ -40,13 +41,12 @@ public class User {
     }
 
     //Constructor all params.
-    public User(String id, String username, String email, String password, String profileImageUrl, String lastMessage, boolean isOnline) {
-        Id = id;
+    public User(String id, String username, String email, String password, String profileImageUrl, boolean isOnline) {
+        this.Id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.profileImageUrl = profileImageUrl;
-        this.lastMessage = lastMessage;
         this.isOnline = isOnline;
     }
 
@@ -69,10 +69,6 @@ public class User {
     @SerializedName("userProfileImageUrl")
     @Expose
     private String profileImageUrl;
-
-    @SerializedName("userLastMessage")
-    @Expose
-    private String lastMessage;
 
 
     @SerializedName("userIsOnline")
@@ -117,14 +113,6 @@ public class User {
 
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
-    }
-
-    public String getLastMessage() {
-        return lastMessage;
-    }
-
-    public void setLastMessage(String lastMessage) {
-        this.lastMessage = lastMessage;
     }
 
     public boolean isOnline() {

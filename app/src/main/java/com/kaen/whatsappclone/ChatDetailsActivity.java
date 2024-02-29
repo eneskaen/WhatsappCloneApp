@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.activity.OnBackPressedCallback;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -80,8 +81,11 @@ public class ChatDetailsActivity extends AppCompatActivity implements ChatAdapte
 
             Intent intent = new Intent(ChatDetailsActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
 
         });
+        
+        setupOnBackPressed();
 
         final ArrayList<Message> messageArrayList = new ArrayList<>();
         final ChatAdapter chatAdapter = new ChatAdapter(this, messageArrayList, receiverId);
@@ -119,10 +123,9 @@ public class ChatDetailsActivity extends AppCompatActivity implements ChatAdapte
                     }
                 });
 
-        binding.sendMessegaButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String messageString = binding.typeMessageEditText.getText().toString().trim();
+        binding.sendMessegaButton.setOnClickListener(v -> {
+            String messageString = binding.typeMessageEditText.getText().toString().trim();
+            if (!messageString.isEmpty()){
                 final Message message = new Message(senderId, messageString);
                 message.setTimestamp(new Date().getTime());
                 binding.typeMessageEditText.setText("");
@@ -130,18 +133,30 @@ public class ChatDetailsActivity extends AppCompatActivity implements ChatAdapte
                 database.getReference().child("Chats")
                         .child(senderRoom)
                         .push()
-                        .setValue(message).addOnSuccessListener( unused -> {
-                            database.getReference().child("Chats")
-                                    .child(recieverRoom)
-                                    .push()
-                                    .setValue(message)
-                                    .addOnSuccessListener(unused1 -> {
+                        .setValue(message).addOnSuccessListener( unused -> database.getReference().child("Chats")
+                                .child(recieverRoom)
+                                .push()
+                                .setValue(message)
+                                .addOnSuccessListener(unused1 -> {
 
-                                    });
-                        });
+                                }));
             }
         });
 
+
+    }
+
+    private void setupOnBackPressed() {
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (isEnabled()){
+                    Intent intent = new Intent(ChatDetailsActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
 
     }
 
@@ -169,7 +184,5 @@ public class ChatDetailsActivity extends AppCompatActivity implements ChatAdapte
         }
 
     }
-
-
-
+    
 }

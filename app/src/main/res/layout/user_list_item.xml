@@ -47,7 +47,7 @@
                 android:id="@+id/lastMessage"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
-                android:text="Last message"
+                android:text="Tap to start chatting"
                 android:maxLines="1" />
         </LinearLayout>
 

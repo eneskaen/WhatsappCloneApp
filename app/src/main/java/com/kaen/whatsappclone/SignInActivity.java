@@ -29,6 +29,8 @@ import com.kaen.whatsappclone.databinding.ActivitySignInBinding;
 import com.kaen.whatsappclone.models.User;
 import com.kaen.whatsappclone.singletons.UserStatusManager;
 
+import java.util.Objects;
+
 public class SignInActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
@@ -130,8 +132,10 @@ public class SignInActivity extends AppCompatActivity {
                 googleFirebaseAuth(account.getIdToken());
             }
             catch (Exception e){
-
-                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                if (!e.getMessage().equals("12501: ")){
+                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
 
             }
 
@@ -162,8 +166,13 @@ public class SignInActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         }
+                        else {
+                            progressBar.setVisibility(View.GONE);
+                        }
 
                     }
+                }).addOnFailureListener(e -> {
+                   progressBar.setVisibility(View.GONE);
                 });
     }
 
